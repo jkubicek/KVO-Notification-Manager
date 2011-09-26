@@ -33,13 +33,13 @@
 
 /// You should not have to use CKVOBlockNotificationHelper. It is an internal helper class used by the NSObject_KVOBlockNotificationExtensions category. Use that instead.
 @interface CKVOBlockNotificationHelper : NSObject {
-	__weak id target;
+	__unsafe_unretained id target;
 	NSString *keyPath;
 	KVOBlock block;
 	NSString *identifier;
 }
 
-@property (readwrite, assign) __weak id target;
+@property (readwrite, assign) __unsafe_unretained id target;
 @property (readwrite, copy) NSString *keyPath;
 @property (readwrite, copy) KVOBlock block;
 @property (readwrite, copy) NSString *identifier;

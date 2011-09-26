@@ -43,49 +43,29 @@
 
 - (id)initWithTarget:(id)inTarget keyPath:(NSString *)inKeyPath block:(KVOBlock)inBlock identifier:(NSString *)inIdentifier;
 {
-NSAssert(inTarget != NULL, @"No target");
-NSAssert(inKeyPath != NULL, @"No key path");
-NSAssert(inBlock != NULL, @"No block");
+    NSAssert(inTarget != NULL, @"No target");
+    NSAssert(inKeyPath != NULL, @"No key path");
+    NSAssert(inBlock != NULL, @"No block");
 
-if ((self = [super init]) != NULL)
-	{
-	target = inTarget;
-	keyPath = [inKeyPath copy];
-	block = [inBlock copy];
-	identifier = [inIdentifier copy];
-	}
-return(self);
+    if ((self = [super init]) != NULL)
+    {
+        target = inTarget;
+        keyPath = [inKeyPath copy];
+        block = [inBlock copy];
+        identifier = [inIdentifier copy];
+    }
+    return(self);
 }
 
-- (void)dealloc
-{
-target = NULL;
-[keyPath release];
-keyPath = NULL;
-[block release];
-block = NULL;
-
-[identifier autorelease];
-identifier = NULL;
-//
-[super dealloc];
-}
-
-//- (void)finalize
-//{
-//NSLog(@"FINALIZE %@", self);
-////
-//[super finalize];
-//}
 
 - (void)observeValueForKeyPath:(NSString *)inKeyPath ofObject:(id)inObject change:(NSDictionary *)inChange context:(void *)inContext
 {
-self.block(inKeyPath, inObject, inChange, self.identifier);
+    self.block(inKeyPath, inObject, inChange, self.identifier);
 }
 
 - (NSString *)description
 {
-return([NSString stringWithFormat:@"%@ (%@)", [super description], self.identifier]);
+    return([NSString stringWithFormat:@"%@ (%@)", [super description], self.identifier]);
 }
 
 @end
